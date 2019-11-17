@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="说明1.系统：小米笔记本pro 8+256 MX1502.此blog为安装archlinux单系统3.默认已制作好usb启动盘，并且已经在BIOS界面设置usb启动盘为默认启动项  安装联网无线wifi-menu 有线systemctl start dhcpcd 更新系统时间12timedatectl set-ntp truetimedatectl status	检查服务状态  创建、格式化、挂载">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch安装">
+<meta property="og:url" content="http://yoursite.com/2019/09/06/Arch安装/index.html">
+<meta property="og:site_name" content="jiaope&#39;s blog">
+<meta property="og:description" content="说明1.系统：小米笔记本pro 8+256 MX1502.此blog为安装archlinux单系统3.默认已制作好usb启动盘，并且已经在BIOS界面设置usb启动盘为默认启动项  安装联网无线wifi-menu 有线systemctl start dhcpcd 更新系统时间12timedatectl set-ntp truetimedatectl status	检查服务状态  创建、格式化、挂载">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-17T06:58:09.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Arch安装">
+<meta name="twitter:description" content="说明1.系统：小米笔记本pro 8+256 MX1502.此blog为安装archlinux单系统3.默认已制作好usb启动盘，并且已经在BIOS界面设置usb启动盘为默认启动项  安装联网无线wifi-menu 有线systemctl start dhcpcd 更新系统时间12timedatectl set-ntp truetimedatectl status	检查服务状态  创建、格式化、挂载">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/06/Arch安装/">
+
+
+
+
+
+  <title>Arch安装 | jiaope's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">jiaope's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/06/Arch安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="jiaope">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="jiaope's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Arch安装</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-06T09:46:03+08:00">
+                2019-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/装机配置/" itemprop="url" rel="index">
+                    <span itemprop="name">装机配置</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h1><p>1.系统：小米笔记本pro 8+256 MX150<br>2.此blog为安装archlinux单系统<br>3.默认已制作好usb启动盘，并且已经在BIOS界面设置usb启动盘为默认启动项</p>
+<hr>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="联网"><a href="#联网" class="headerlink" title="联网"></a>联网</h2><h3 id="无线"><a href="#无线" class="headerlink" title="无线"></a>无线</h3><p><code>wifi-menu</code></p>
+<h3 id="有线"><a href="#有线" class="headerlink" title="有线"></a>有线</h3><p><code>systemctl start dhcpcd</code></p>
+<h2 id="更新系统时间"><a href="#更新系统时间" class="headerlink" title="更新系统时间"></a>更新系统时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timedatectl set-ntp true</span><br><span class="line">timedatectl status	检查服务状态</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建、格式化、挂载分区"><a href="#创建、格式化、挂载分区" class="headerlink" title="创建、格式化、挂载分区"></a>创建、格式化、挂载分区</h2><h3 id="查看-以下方法均可"><a href="#查看-以下方法均可" class="headerlink" title="查看(以下方法均可)"></a>查看(以下方法均可)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">parted -l</span><br><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建-此blog使用parted创建分区"><a href="#创建-此blog使用parted创建分区" class="headerlink" title="创建(此blog使用parted创建分区)"></a>创建(此blog使用parted创建分区)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/nvme0n1</span><br><span class="line">(parted) mklabel gpt</span><br><span class="line">(parted) mkpart ESP fat32 1MiB 513MiB                   EFI系统分区</span><br><span class="line">(parted) set 1 boot on</span><br><span class="line">(parted) mkpart primary ext4 513MiB 60.5GiB             /</span><br><span class="line">(parted) mkpart primary linux-swap 60.5GiB 68.5GiB      swap</span><br><span class="line">(parted) mkpart primary ext4 68.5GiB 100%               /home</span><br></pre></td></tr></table></figure>
+
+<h3 id="格式化"><a href="#格式化" class="headerlink" title="格式化"></a>格式化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkfs.vfat -F32 /dev/nvme0n1px       格式化EFI分区</span><br><span class="line">mkfs.ext4 /dev/nvme0n1px            格式化根分区</span><br><span class="line">mkswap /dev/nvme0n1px               格式化swap分区</span><br><span class="line">swapon /dev/nvme0n1px               打开swap分区</span><br><span class="line">mkfs.ext4 /dev/nvme0n1px            格式化home分区</span><br></pre></td></tr></table></figure>
+
+<h3 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/nvme0n1px /mnt                   挂载根分区</span><br><span class="line">mkdir /mnt/home</span><br><span class="line">mount /dev/nvme0n1px /mnt/home              挂载home分区</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mkdir /mnt/boot/EFI</span><br><span class="line">mount /dev/nvme0n1px /mnt/boot/EFI          挂载EFI系统分区</span><br></pre></td></tr></table></figure>
+
+<h2 id="更换国内镜像源"><a href="#更换国内镜像源" class="headerlink" title="更换国内镜像源"></a>更换国内镜像源</h2><p>1.进入<a href="https://www.archlinux.org/mirrorlist" target="_blank" rel="noopener">https://www.archlinux.org/mirrorlist</a><br>2.Country选择China<br>3.点击Generate List<br>4.code</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -O /etc/pacman.d/mirrorlist &quot;完成3后跳转网站的网址&quot;</span><br><span class="line">cat /etc/pacman.d/mirrorlist</span><br><span class="line">sed -i &quot;s/#Server/Server/g&quot; /etc/pacman.d/mirrorlist</span><br><span class="line">cat /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装基础包"><a href="#安装基础包" class="headerlink" title="安装基础包"></a>安装基础包</h2><p><code>pacstrap /mnt base base-devel</code></p>
+<h2 id="生成fstab"><a href="#生成fstab" class="headerlink" title="生成fstab"></a>生成fstab</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line">cat /mnt/etc/fstab                           检查生成的文件是否正确</span><br></pre></td></tr></table></figure>
+
+<h2 id="进入新安装的系统"><a href="#进入新安装的系统" class="headerlink" title="进入新安装的系统"></a>进入新安装的系统</h2><p><code>arch-chroot /mnt</code></p>
+<h2 id="时区"><a href="#时区" class="headerlink" title="时区"></a>时区</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc                                               同步本地时间</span><br><span class="line">date -R                                                         查看时间</span><br></pre></td></tr></table></figure>
+
+<h2 id="本地化"><a href="#本地化" class="headerlink" title="本地化"></a>本地化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/locale.gen                               找到下面两行移除前面的#号并保存退出</span><br><span class="line">	en_US.UTF-8 UTF-8</span><br><span class="line">	zh_CN.UTF-8 UTF-8</span><br><span class="line">locale-gen</span><br><span class="line">echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf       设置环境变量为英文</span><br></pre></td></tr></table></figure>
+
+<h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;archlinux&quot; &gt; /etc/hostname                            设置计算机主机名</span><br><span class="line">vi /etc/hosts                                               添加下面三行到hosts</span><br><span class="line">	127.0.0.1   localhost</span><br><span class="line">	::1         localhost</span><br><span class="line">	127.0.0.1   archlinux.localdomain archlinux</span><br></pre></td></tr></table></figure>
+
+<h2 id="root与普通账户"><a href="#root与普通账户" class="headerlink" title="root与普通账户"></a>root与普通账户</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">passwd                                  root密码</span><br><span class="line">useradd -m -G wheel jiaop               添加普通用户</span><br><span class="line">passwd jiaop                            普通用户密码</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装必要包"><a href="#安装必要包" class="headerlink" title="安装必要包"></a>安装必要包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S iw wpa_supplicant dialog      wifi联网</span><br><span class="line">pacman -S intel-ucode                   intel微码</span><br></pre></td></tr></table></figure>
+
+<h2 id="引导"><a href="#引导" class="headerlink" title="引导"></a>引导</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot/EFI --bootloader-id=GRUB</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<h2 id="重启"><a href="#重启" class="headerlink" title="重启"></a>重启</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit                    退出chroot环境</span><br><span class="line">umount -R /mnt          卸载被挂载的分区</span><br><span class="line">reboot                  重启并拔出u盘</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><ul>
+<li><a href="https://www.bilibili.com/video/av56970488" target="_blank" rel="noopener">跟着官方文档，手把手教你安装 Arch Linux 2019</a></li>
+<li><a href="https://www.bilibili.com/video/av45282571/?spm_id_from=333.788.videocard.0" target="_blank" rel="noopener">[真机2019]超详细手把手最新版ArchLinux安装教程</a></li>
+<li><a href="https://www.jianshu.com/p/6fe59c24b3df?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation" target="_blank" rel="noopener">Arch Linux 安装手册/傻瓜书/教程/指南</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Installation_guide_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">Installation guide (简体中文)</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Users_and_groups_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E6%B7%BB%E5%8A%A0%E7%99%BB%E5%BD%95%E7%94%A8%E6%88%B7" target="_blank" rel="noopener">Users and groups (简体中文)</a></li>
+<li><a href="https://man.linuxde.net/useradd" target="_blank" rel="noopener">useradd命令</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Netctl_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)" target="_blank" rel="noopener">netctl (简体中文)</a></li>
+<li><a href="https://www.runoob.com/linux/linux-shell-echo.html" target="_blank" rel="noopener">Shell echo命令</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/01/hexo迁移/" rel="next" title="hexo迁移">
+                <i class="fa fa-chevron-left"></i> hexo迁移
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/07/Arch配置/" rel="prev" title="Arch配置">
+                Arch配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">jiaope</p>
+              <p class="site-description motion-element" itemprop="description">记忆存储</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#说明"><span class="nav-number">1.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#联网"><span class="nav-number">2.1.</span> <span class="nav-text">联网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#无线"><span class="nav-number">2.1.1.</span> <span class="nav-text">无线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有线"><span class="nav-number">2.1.2.</span> <span class="nav-text">有线</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新系统时间"><span class="nav-number">2.2.</span> <span class="nav-text">更新系统时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建、格式化、挂载分区"><span class="nav-number">2.3.</span> <span class="nav-text">创建、格式化、挂载分区</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看-以下方法均可"><span class="nav-number">2.3.1.</span> <span class="nav-text">查看(以下方法均可)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-此blog使用parted创建分区"><span class="nav-number">2.3.2.</span> <span class="nav-text">创建(此blog使用parted创建分区)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化"><span class="nav-number">2.3.3.</span> <span class="nav-text">格式化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载"><span class="nav-number">2.3.4.</span> <span class="nav-text">挂载</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换国内镜像源"><span class="nav-number">2.4.</span> <span class="nav-text">更换国内镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装基础包"><span class="nav-number">2.5.</span> <span class="nav-text">安装基础包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成fstab"><span class="nav-number">2.6.</span> <span class="nav-text">生成fstab</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进入新安装的系统"><span class="nav-number">2.7.</span> <span class="nav-text">进入新安装的系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时区"><span class="nav-number">2.8.</span> <span class="nav-text">时区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地化"><span class="nav-number">2.9.</span> <span class="nav-text">本地化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络"><span class="nav-number">2.10.</span> <span class="nav-text">网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#root与普通账户"><span class="nav-number">2.11.</span> <span class="nav-text">root与普通账户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装必要包"><span class="nav-number">2.12.</span> <span class="nav-text">安装必要包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引导"><span class="nav-number">2.13.</span> <span class="nav-text">引导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重启"><span class="nav-number">2.14.</span> <span class="nav-text">重启</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#链接"><span class="nav-number">3.</span> <span class="nav-text">链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jiaope</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
